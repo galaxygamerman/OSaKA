@@ -55,7 +55,7 @@ const Waiter = () => {
     setItemsSelected(oldSelectedItems => {
       const newSelectedItems = [...oldSelectedItems];
       if (Qty[index] === 1)
-        return [...newSelectedItems, { name: items[index].name, quantity: Qty[index] }];
+        return [...newSelectedItems, { name: items[index].name, quantity: Qty[index], price: items[index].price }];
       else {
         const indexToBeDeleted = newSelectedItems.findIndex(cursor => cursor.name === items[index].name
           && cursor.quantity === (Qty[index] - 1)
