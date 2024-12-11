@@ -34,7 +34,7 @@ const Chef = () => {
       status: "Cooked"
     };
     try {
-      const response = await axios.put(`${process.env.REACT_APP_BACKEND_URI}/item/${orderID}`, newOrderData);
+      await axios.put(`${process.env.REACT_APP_BACKEND_URI}/item/${orderID}`, newOrderData);
       setReloadFlag(cur => !cur);
     } catch (error) {
       console.error("Error updating job:" + error);
