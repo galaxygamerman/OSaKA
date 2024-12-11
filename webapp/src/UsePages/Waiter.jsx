@@ -86,7 +86,6 @@ const Waiter = () => {
         totalPrice: itemsSelected.reduce((acc, curr) => acc + (curr.quantity * curr.price), 0),
         status: "Pending"
       };
-      console.log(orderData);
       // Send POST request to the backend API
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URI}/item`, { ...orderData });
 

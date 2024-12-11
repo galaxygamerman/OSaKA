@@ -15,7 +15,6 @@ const Chef = () => {
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/items`);
       let tempQ = [...response.data].filter(data => data.status === 'Pending')
       setQueue(tempQ);
-      // console.log(response.data);
       return tempQ;
     } catch (error) {
       console.error("Error fetching jobs:", error);
@@ -36,7 +35,6 @@ const Chef = () => {
     };
     try {
       const response = await axios.put(`${process.env.REACT_APP_BACKEND_URI}/item/${orderID}`, newOrderData);
-      console.log(response);
       setReloadFlag(cur => !cur);
     } catch (error) {
       console.error("Error updating job:" + error);
@@ -46,7 +44,6 @@ const Chef = () => {
   useEffect(() => {
     getJobs();
     return () => {
-      console.log('useEffect exited');
     }
   }, [reloadFlag]);  // Needed to only run once, else spams the mongodb with each rerender
 

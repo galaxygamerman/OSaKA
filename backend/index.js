@@ -22,7 +22,6 @@ mongoose.connect(process.env.MONGO_CONN_URI)
 app.post('/item', async (req, res) => {
 	try {
 		const newOrder = new Order(req.body);
-		console.log(newOrder);
 		const savedItem = await newOrder.save();
 		res.status(201).json(savedItem);
 	} catch (error) {
