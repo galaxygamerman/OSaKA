@@ -33,7 +33,12 @@ app.post('/item', async (req, res) => {
 // Read (all items)
 app.get('/items', async (req, res) => {
 	try {
-		const orders = await Order.find();
+		let orders;
+		if (req.query.status) {
+			orders = await Order.find({ status: req.query.status });
+		} else {
+			orders = await Order.find();
+		}
 		res.json(orders);
 	} catch (error) {
 		res.status(500).json({ message: error.message });

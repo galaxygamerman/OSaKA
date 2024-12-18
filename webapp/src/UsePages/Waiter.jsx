@@ -104,8 +104,10 @@ const Waiter = () => {
 
   async function getJobs() {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/items`);
-      let tempQ = [...response.data].filter(data => data.status !== 'Delivered')
+      // To get every order that hasn't been Delivered yet
+      const PendingOrders = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/items?status=Pending`);
+      const CookedOrders = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/items?status=Cooked`);
+      let tempQ = [...CookedOrders.data, ...PendingOrders.data];
       setStatusQueue(tempQ);
     } catch (error) {
       console.error("Error fetching jobs:", error);

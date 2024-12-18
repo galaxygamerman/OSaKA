@@ -12,10 +12,9 @@ const Chef = () => {
 
   async function getJobs() {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/items`);
-      let tempQ = [...response.data].filter(data => data.status === 'Pending')
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URI}/items?status=Pending`);
+      let tempQ = [...response.data];
       setQueue(tempQ);
-      return tempQ;
     } catch (error) {
       console.error("Error fetching jobs:", error);
     }
