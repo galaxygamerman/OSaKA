@@ -57,9 +57,14 @@ app.get('/item/:id', async (req, res) => {
 });
 
 // Update
-app.put('/item/:id', async (req, res) => {
+app.put('/item/:id/:newState', async (req, res) => {
 	try {
-		const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
+		// Retrieve the old order from the DB
+		const foundOrder = await Order.findById(req.params.id);
+		if (!foundOrder) return res.status(404).json({ message: 'Order not found' });
+		// Change the state
+		foundOrder.status = req.params.newState;
+		const updatedOrder = await Order.findByIdAndUpdate(foundOrder._id, foundOrder, { new: true });
 		if (!updatedOrder) return res.status(404).json({ message: 'Order not found' });
 		res.json(updatedOrder);
 	} catch (error) {

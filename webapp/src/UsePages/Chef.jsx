@@ -22,18 +22,8 @@ const Chef = () => {
 
   async function changeStatusToCooked(index) {
     const orderID = queue[index]._id;
-    const newOrderData = {
-      name: queue[index].name,
-      items: queue[index].items.map(item => ({
-        name: item.name,
-        quantity: item.quantity,
-        price: item.price
-      })),
-      totalPrice: queue[index].totalPrice,
-      status: "Cooked"
-    };
     try {
-      await axios.put(`${process.env.REACT_APP_BACKEND_URI}/item/${orderID}`, newOrderData);
+      await axios.put(`${process.env.REACT_APP_BACKEND_URI}/item/${orderID}/Cooked`);
       setReloadFlag(cur => !cur);
     } catch (error) {
       console.error("Error updating job:" + error);

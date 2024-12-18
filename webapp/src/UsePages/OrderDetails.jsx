@@ -20,20 +20,10 @@ const OrderDetails = () => {
   }, [id]);
 
   async function changeStatusToDelivered() {
-    const newOrderData = {
-      name: order.name,
-      items: order.items.map(item => ({
-        name: item.name,
-        quantity: item.quantity,
-        price: item.price
-      })),
-      totalPrice: order.totalPrice,
-      status: "Delivered"
-    };
     try {
-      await axios.put(`${process.env.REACT_APP_BACKEND_URI}/item/${id}`, newOrderData);
+      const newOrderData = await axios.put(`${process.env.REACT_APP_BACKEND_URI}/item/${id}/Delivered`);
       // Update local state to reflect the change
-      setOrder(newOrderData);
+      setOrder(newOrderData.data);
     } catch (error) {
       console.error("Error updating job:" + error);
     }
