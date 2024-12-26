@@ -166,11 +166,11 @@ const Waiter = () => {
               </thead>
               <tbody>
                 {statusQueue.map(order => (
-                  <tr key={order._id}>
+                  <tr key={order._id || order.id}>
                     <td>{order.name}</td>
                     <td>₹{order.total_price}</td>
                     <td>
-                      <Button onClick={() => navigate(`/order/${order._id}`)}>{order.status}</Button>
+                      <Button onClick={() => navigate(`/order/${order._id || order.id}`)}>{order.status}</Button>
                     </td>
                   </tr>
                 ))}
