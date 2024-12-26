@@ -35,8 +35,14 @@ app.post('/item', async (req, res) => {
 		const result1 = await pool.query('INSERT INTO customer_order (name, totalPrice, status) VALUES ($1,$2,$3) RETURNING *',
 			[name, totalPrice, status]);
 		let outputRows = result1.rows;
-		// res.status(201).json(result1.rows);
 		customer_order_id = result1.rows[0].id;
+
+		for (const item of items) {
+			const result2 = await pool.query('INSERT INTO chosen_item (order_id, name, quantity, price) VALUES ($1, $2, $3, $4) RETURNING *',
+				[customer_order_id, item.name, item.quantity, item.price]);
+			outputRows.push(...result2.rows);
+		}
+
 		console.log(outputRows);
 		res.status(201).json(outputRows);
 	} catch (error) {
