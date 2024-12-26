@@ -24,10 +24,10 @@ pool.connect()
 
 // Create
 app.post('/item', async (req, res) => {
-	let name = req.body.name;
+	let name = req.body.name || 'This was not made using a normal client';
 	let items = req.body.items;
 	let total_price = req.body.total_price;
-	let status = req.body.status;
+	let status = req.body.status || 'Pending';
 
 	try {
 		const result1 = await pool.query('INSERT INTO customer_order (name, total_price, status) VALUES ($1,$2,$3) RETURNING *',
