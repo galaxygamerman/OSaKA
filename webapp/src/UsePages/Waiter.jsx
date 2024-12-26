@@ -67,8 +67,8 @@ const Waiter = () => {
   }
 
   function handleFinalize() {
-    const totalPrice = [...itemsSelected].reduce((accummulator, curr) => accummulator + (curr.quantity * curr.price), 0);
-    if (totalPrice <= 0) return alert("Please select items before finalizing order.");
+    const total_price = [...itemsSelected].reduce((accummulator, curr) => accummulator + (curr.quantity * curr.price), 0);
+    if (total_price <= 0) return alert("Please select items before finalizing order.");
     setShowModal(true);
   }
 
@@ -83,7 +83,7 @@ const Waiter = () => {
           quantity: item.quantity,
           price: item.price
         })),
-        totalPrice: itemsSelected.reduce((acc, curr) => acc + (curr.quantity * curr.price), 0),
+        total_price: itemsSelected.reduce((acc, curr) => acc + (curr.quantity * curr.price), 0),
         status: "Pending"
       };
       // Send POST request to the backend API
@@ -168,7 +168,7 @@ const Waiter = () => {
                 {statusQueue.map(order => (
                   <tr key={order._id}>
                     <td>{order.name}</td>
-                    <td>₹{order.totalPrice}</td>
+                    <td>₹{order.total_price}</td>
                     <td>
                       <Button onClick={() => navigate(`/order/${order._id}`)}>{order.status}</Button>
                     </td>

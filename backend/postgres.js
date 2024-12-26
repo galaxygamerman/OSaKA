@@ -28,12 +28,12 @@ app.post('/item', async (req, res) => {
 
 	let name = req.body.name;
 	let items = req.body.items;
-	let totalPrice = req.body.totalPrice;
+	let total_price = req.body.total_price;
 	let status = req.body.status;
 
 	try {
-		const result1 = await pool.query('INSERT INTO customer_order (name, totalPrice, status) VALUES ($1,$2,$3) RETURNING *',
-			[name, totalPrice, status]);
+		const result1 = await pool.query('INSERT INTO customer_order (name, total_price, status) VALUES ($1,$2,$3) RETURNING *',
+			[name, total_price, status]);
 		let outputRows = result1.rows;
 		customer_order_id = result1.rows[0].id;
 
