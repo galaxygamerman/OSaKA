@@ -53,7 +53,7 @@ const OrderDetails = () => {
                   {order.status}
                 </span>
               </Card.Text>
-              <Card.Text><strong>Total Price:</strong> ₹{order.totalPrice}</Card.Text>
+              <Card.Text><strong>Total Price:</strong> ₹{order.total_price}</Card.Text>
             </div>
           </div>
 

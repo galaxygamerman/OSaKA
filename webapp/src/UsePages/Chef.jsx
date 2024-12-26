@@ -21,7 +21,7 @@ const Chef = () => {
   }
 
   async function changeStatusToCooked(index) {
-    const orderID = queue[index]._id;
+    const orderID = queue[index]._id || queue[index].id;
     try {
       await axios.put(`${process.env.REACT_APP_BACKEND_URI}/item/${orderID}/Cooked`);
       setReloadFlag(cur => !cur);
@@ -68,7 +68,7 @@ const Chef = () => {
                       </ul>
                       <div className="d-flex justify-content-between align-items-center">
                         <span className="badge bg-primary rounded-pill fs-6">
-                          ${order.totalPrice}
+                          ${order.total_price}
                         </span>
                         <button className="btn btn-success btn-sm" onClick={() => changeStatusToCooked(index)}>
                           Mark as Complete

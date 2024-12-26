@@ -10,7 +10,7 @@ const MenuItemSchema = new mongoose.Schema({
 const orderSchema = new mongoose.Schema({
 	name: String,
 	items: [MenuItemSchema],
-	totalPrice: Number,
+	total_price: Number,
 	status: String
 });
 const Order = mongoose.model('Order', orderSchema);
