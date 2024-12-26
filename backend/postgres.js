@@ -84,14 +84,13 @@ app.get('/item/:id', async (req, res) => {
 // Update
 app.put('/item/:id/:newState', async (req, res) => {
 	try {
-		console.log('here');
-		const order = await pool.query('UPDATE customer_order SET status = $1 WHERE id = $2 RETURNING *', [req.params.newState, req.params.id]).rows[0];
-		console.log(order);
+		const order = (await pool.query('UPDATE customer_order SET status = $1 WHERE id = $2 RETURNING *', [req.params.newState, req.params.id])).rows[0];
+
 		if (!order) return res.status(404).json({ message: 'Order not found' });
+
 		const items = await pool.query('SELECT * FROM chosen_item WHERE order_id = $1', [order.id]);
-		// console.log(items);
-		order.items = items.rows;
-		res.status(200).json(order);
+		order.items = items.rows; // Add items to the order
+		res.status(200).json(order); // Return the updated order
 	} catch (error) {
 		res.status(400).json({ message: error.message });
 	}
