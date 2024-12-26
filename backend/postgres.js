@@ -34,13 +34,11 @@ app.post('/item', async (req, res) => {
 			[name, total_price, status]);
 		let outputRows = result1.rows;
 		customer_order_id = result1.rows[0].id;
-
 		for (const item of items) {
 			const result2 = await pool.query('INSERT INTO chosen_item (order_id, name, quantity, price) VALUES ($1, $2, $3, $4) RETURNING *',
 				[customer_order_id, item.name, item.quantity, item.price]);
 			outputRows.push(...result2.rows);
 		}
-		// console.log(outputRows);
 		res.status(201).json(outputRows);
 	} catch (error) {
 		console.error("Error saving order", error);
@@ -73,7 +71,6 @@ app.get('/item/:id', async (req, res) => {
 		let order = (await pool.query('SELECT * FROM customer_order WHERE id = $1', [req.params.id])).rows[0];
 		if (!order) return res.status(404).json({ message: 'Order not found' });
 		const items = await pool.query('SELECT * FROM chosen_item WHERE order_id = $1', [order.id]);
-		// console.log(items);
 		order.items = items.rows;
 		res.status(200).json(order);
 	} catch (error) {
@@ -85,9 +82,7 @@ app.get('/item/:id', async (req, res) => {
 app.put('/item/:id/:newState', async (req, res) => {
 	try {
 		const order = (await pool.query('UPDATE customer_order SET status = $1 WHERE id = $2 RETURNING *', [req.params.newState, req.params.id])).rows[0];
-
 		if (!order) return res.status(404).json({ message: 'Order not found' });
-
 		const items = await pool.query('SELECT * FROM chosen_item WHERE order_id = $1', [order.id]);
 		order.items = items.rows; // Add items to the order
 		res.status(200).json(order); // Return the updated order
