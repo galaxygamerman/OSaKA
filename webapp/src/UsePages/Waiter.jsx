@@ -77,7 +77,7 @@ const Waiter = () => {
 
     try {
       const orderData = {
-        name: customerName,
+        customer_name: customerName,
         items: itemsSelected.map(item => ({
           name: item.name,
           quantity: item.quantity,
@@ -167,7 +167,7 @@ const Waiter = () => {
               <tbody>
                 {statusQueue.map(order => (
                   <tr key={order._id || order.id}>
-                    <td>{order.name}</td>
+                    <td>{order.customer_name}</td>
                     <td>₹{order.total_price}</td>
                     <td>
                       <Button onClick={() => navigate(`/order/${order._id || order.id}`)}>{order.status}</Button>

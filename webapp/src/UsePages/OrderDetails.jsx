@@ -46,7 +46,7 @@ const OrderDetails = () => {
         <Card.Body>
           <div className="row mb-3">
             <div className="col-md-6">
-              <Card.Text><strong>Customer Name:</strong> {order.name}</Card.Text>
+              <Card.Text><strong>Customer Name:</strong> {order.customer_name}</Card.Text>
               <Card.Text>
                 <strong>Order Status:</strong>{' '}
                 <span className={`badge ${order.status === 'Delivered' ? 'bg-success' : 'bg-warning'}`}>
