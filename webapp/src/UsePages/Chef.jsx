@@ -50,11 +50,11 @@ const Chef = () => {
         {queue.length > 0 ? (
           <div className="row g-3 justify-content-center">
             {queue.map((order, index) => (
-              <div key={order.name} className="col-sm-12 col-md-auto">
+              <div key={order.customer_name} className="col-sm-12 col-md-auto">
                 <div className="card h-100 shadow-sm shadow-lg">
                   <div className="card-body h-100">
                     <h3 className="card-title text-center mb-3 text-dark fw-bold">
-                      {order.name}
+                      {order.customer_name}
                     </h3>
                     <div className="card-text">
                       <p className="fw-bold mb-2">Items:</p>
