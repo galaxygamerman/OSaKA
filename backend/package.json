@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon",
+    "example": "env-cmd -f .env.example nodemon"
+  },
   "dependencies": {
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
@@ -6,5 +11,8 @@
     "express": "^4.21.1",
     "mongoose": "^8.8.0",
     "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }
